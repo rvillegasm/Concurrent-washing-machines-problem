@@ -4,8 +4,10 @@
 #include "lavadoraid.h"
 
 class AgenteVoid : public Sincronizador {
+ private:
+  GenCarga& genCarga;
  public:
-  AgenteVoid();
+  AgenteVoid(GenCarga& genCarga);
   ~AgenteVoid();
   void arrancar(LavadoraID lavadoraID, int carga);
   void parar(LavadoraID lavadoraID);

@@ -29,7 +29,7 @@ main(int argc, char *argv[]) {
   double p = toDouble(argv[2]);
 
   GenCarga* genCarga = new GenCargaImpl(maxload);
-  Sincronizador* agenteSin = new AgenteVoid();
+  Sincronizador* agenteSin = new AgenteVoid(*genCarga);
 
   Lavadora lavadoraA { LavadoraA, *agenteSin, *genCarga, p };
   Lavadora lavadoraB { LavadoraB, *agenteSin, *genCarga, 1-p };
