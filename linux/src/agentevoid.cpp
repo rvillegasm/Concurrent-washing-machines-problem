@@ -38,9 +38,18 @@ void AgenteVoid::parar(LavadoraID lavadoraID) {
     if (cargaSimultanea < 0) { // Si la carga es mayor a la maxima...
         sem_post(&scLavado); // ... libera la seccion critica para que la otra lave
     }
-    sem_wait(&mutex); // Seccion critica para reiniciar la carga simultanea
+    // sem_wait(&mutex); // Seccion critica para reiniciar la carga simultanea
+    // cargaSimultanea = this->genCarga.obtenerCargaMax(); // Reinicia la carga simultanea en la carga maxima
+    // sem_post(&mutex); // Sale de la seccion critica de reinicio
+    if (lavadoraID == LavadoraA) {
+        sem_post(&syncA); // A avisa que ya llego
+        sem_wait(&syncB); // A espera por B
+    }
+    else {
+        sem_post(&syncB); // B avisa que ya llego
+        sem_wait(&syncA); // B espera por A
+    }
     cargaSimultanea = this->genCarga.obtenerCargaMax(); // Reinicia la carga simultanea en la carga maxima
-    sem_post(&mutex); // Sale de la seccion critica de reinicio
     if (lavadoraID == LavadoraA) {
         sem_post(&syncA); // A avisa que ya llego
         sem_wait(&syncB); // A espera por B
