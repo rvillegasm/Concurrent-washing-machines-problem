@@ -18,11 +18,8 @@ public class PrincipalLavadorasDual {
 	    usage();
 	}
 
-
 	int maxCarga = Integer.parseInt(args[0]);
-	Double p = Double.parseDouble(args[0]);
-
-	String className = args[1];
+	Double p = Double.parseDouble(args[1]);
 
 	GenCargas genCargas = new GenCargasImpl(maxCarga);
 
